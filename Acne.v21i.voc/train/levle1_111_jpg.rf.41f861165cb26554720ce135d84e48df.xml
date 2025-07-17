@@ -1,0 +1,40 @@
+<annotation>
+	<folder></folder>
+	<filename>levle1_111_jpg.rf.41f861165cb26554720ce135d84e48df.jpg</filename>
+	<path>levle1_111_jpg.rf.41f861165cb26554720ce135d84e48df.jpg</path>
+	<source>
+		<database>roboflow.ai</database>
+	</source>
+	<size>
+		<width>416</width>
+		<height>276</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>nodules</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>104</xmin>
+			<xmax>135</xmax>
+			<ymin>183</ymin>
+			<ymax>215</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>dark spot</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>113</xmin>
+			<xmax>128</xmax>
+			<ymin>222</ymin>
+			<ymax>238</ymax>
+		</bndbox>
+	</object>
+</annotation>

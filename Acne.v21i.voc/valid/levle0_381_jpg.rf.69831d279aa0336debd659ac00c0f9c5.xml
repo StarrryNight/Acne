@@ -1,0 +1,53 @@
+<annotation>
+	<folder></folder>
+	<filename>levle0_381_jpg.rf.69831d279aa0336debd659ac00c0f9c5.jpg</filename>
+	<path>levle0_381_jpg.rf.69831d279aa0336debd659ac00c0f9c5.jpg</path>
+	<source>
+		<database>roboflow.ai</database>
+	</source>
+	<size>
+		<width>376</width>
+		<height>416</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>nodules</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>337</xmin>
+			<xmax>370</xmax>
+			<ymin>311</ymin>
+			<ymax>337</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>dark spot</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>216</xmin>
+			<xmax>239</xmax>
+			<ymin>40</ymin>
+			<ymax>58</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>dark spot</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>198</xmin>
+			<xmax>217</xmax>
+			<ymin>48</ymin>
+			<ymax>72</ymax>
+		</bndbox>
+	</object>
+</annotation>

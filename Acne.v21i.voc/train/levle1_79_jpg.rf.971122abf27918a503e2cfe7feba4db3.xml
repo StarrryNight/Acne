@@ -1,0 +1,27 @@
+<annotation>
+	<folder></folder>
+	<filename>levle1_79_jpg.rf.971122abf27918a503e2cfe7feba4db3.jpg</filename>
+	<path>levle1_79_jpg.rf.971122abf27918a503e2cfe7feba4db3.jpg</path>
+	<source>
+		<database>roboflow.ai</database>
+	</source>
+	<size>
+		<width>416</width>
+		<height>278</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>nodules</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>207</xmin>
+			<xmax>225</xmax>
+			<ymin>104</ymin>
+			<ymax>127</ymax>
+		</bndbox>
+	</object>
+</annotation>

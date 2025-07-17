@@ -1,0 +1,27 @@
+<annotation>
+	<folder></folder>
+	<filename>levle1_497_jpg.rf.44d4337e6f41224b7a43d751af634a8b.jpg</filename>
+	<path>levle1_497_jpg.rf.44d4337e6f41224b7a43d751af634a8b.jpg</path>
+	<source>
+		<database>roboflow.ai</database>
+	</source>
+	<size>
+		<width>374</width>
+		<height>416</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>papules</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>137</xmin>
+			<xmax>159</xmax>
+			<ymin>223</ymin>
+			<ymax>244</ymax>
+		</bndbox>
+	</object>
+</annotation>
