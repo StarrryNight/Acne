@@ -28,7 +28,7 @@ Model is trained using dataset from https://universe.roboflow.com/acne-training-
 You can install the required packages using pip:
 
 ```bash
-pip install numpy pandas matplotlib imageio scikit-image keras tensorflow
+pip install -r requirements.txt
 ```
 
 ## Data Preparation
@@ -49,10 +49,10 @@ The main script for processing is `processing.py`. It will:
 To run the script:
 
 ```bash
-python processing.py
+python main.py
 ```
 
-The script is robust to missing files and will print helpful error messages if it encounters issues.
+Model is already trained and saved in the result folder as classifier. Changing the image path in main.py allow different images to be tested.
 
 ## Output
 
