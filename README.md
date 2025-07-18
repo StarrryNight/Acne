@@ -1,7 +1,11 @@
 # Acne Detector Region Proposal Pipeline
 **Latest model accuracy -- 50%
+
 loss and accuracy graphs:
-## Introduction
+<img width="1910" height="558" alt="image" src="https://github.com/user-attachments/assets/700ef095-7fb9-45eb-bd54-2ad9a00907af" />
+
+## Introduction (Image is taken from roboflow universe and processed through this model)
+<img width="1067" height="406" alt="image" src="https://github.com/user-attachments/assets/70282dc5-3c31-4151-ba17-875673f15290" />
 
 This project is designed to process and prepare image data for training convolutional neural networks (CNNs) to detect various types of acne lesions (such as blackheads, whiteheads, nodules, dark spots, and pustules) in facial images. The pipeline uses region proposal techniques and annotation data to extract and save candidate regions for each acne type, making it easier to train robust object detection models.
 
@@ -9,6 +13,7 @@ Instead of a traditional CNN, the project uses RCNN, regional convolutional netw
 
 This project is based on Rich feature hierarchies for accurate object detection and semantic segmentation by Ross Girshick et al, and is modified upon ObjectDetectionWithRCNN from Yumi Kondo on github. 
 
+Model is trained using dataset from https://universe.roboflow.com/acne-training-9ct8c/acne-training-3
 ## Requirements
 
 - Python 3.7+
@@ -23,7 +28,7 @@ This project is based on Rich feature hierarchies for accurate object detection 
 You can install the required packages using pip:
 
 ```bash
-pip install numpy pandas matplotlib imageio scikit-image keras tensorflow
+pip install -r requirements.txt
 ```
 
 ## Data Preparation
@@ -44,10 +49,10 @@ The main script for processing is `processing.py`. It will:
 To run the script:
 
 ```bash
-python processing.py
+python main.py
 ```
 
-The script is robust to missing files and will print helpful error messages if it encounters issues.
+Model is already trained and saved in the result folder as classifier. Changing the image path in main.py allow different images to be tested.
 
 ## Output
 
