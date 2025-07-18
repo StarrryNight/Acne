@@ -11,7 +11,7 @@ from keras.models import load_model
 import training.helper as h
 
 dir_image = "preprocessed_data/valid"
-img = imageio.imread(os.path.join(dir_image,"levle2_33_jpg.rf.82673c1c060e160552fb5a8ae1a19982.jpg"))
+img = imageio.imread(os.path.join(dir_image,"levle3_57_jpg.rf.4677ffc10f5281e0f58e19e433afc7f6.jpg"))
 ## resize the image because the original image is a bit too large and takes lots of time for computation
 # I used this resizing hack to train the classifier and also to extract candidate regions
 newsize = (200,250)
