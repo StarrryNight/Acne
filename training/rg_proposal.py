@@ -8,7 +8,7 @@ import skimage.segmentation
 import skimage.feature
 import imageio
 from copy import copy
-import helper as h
+import training.helper as h
 img_dir = "preprocessed_data/train"
 
 ############MAIN STARTS HERE#######################

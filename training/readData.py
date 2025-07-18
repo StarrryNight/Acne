@@ -6,9 +6,9 @@ from keras import models
 import pickle
 import helper as h
 import time 
+import torch
 classifier_types = ['blackheads', 'whiteheads', 'nodules', 'dark spot', 'pustules']
-X = []
-y = []
+
 import time
 def warp_and_create_cnn_feature(image,modelvgg):
     '''
@@ -50,17 +50,24 @@ name_to_var =  {
 for idx, name in enumerate(classifier_types):
     with open(f'./result/{name}_positives.pickle', 'rb') as f:
         positives = pickle.load(f)
-        print("Hi")
-        print(positives)
-    
-    
-        name_to_var[name] = (warp_and_create_cnn_feature(positives,modelvgg),idx)
+        
+        tempX =torch.from_numpy(warp_and_create_cnn_feature(positives,modelvgg))
+        
+        empty = [[0,0,0,0,0]]
+        empty[0][idx]=1
+        tempY = torch.tensor(empty*len(tempX))
+        name_to_var[name] =  [tempX,tempY]
 
-
+X,y =  None, None
 ## stack the sets of data
-for key,value in name_to_var:
-    X = np.concatenate(X,value[0])
-    y = np.concatenate(y,value[0])
+for key,value in name_to_var.items():
+    print(value[0].shape)
+    if X==None and y==None:
+        X = value[0]
+        y=value[1]
+    else:
+        X =torch.cat([X,value[0]], dim=0)
+        y = torch.cat([y,value[1]], dim=0)
 
 
 ## Save data
