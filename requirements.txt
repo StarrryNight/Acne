@@ -6,3 +6,4 @@ matplotlib
 seaborn
 pandas
 pyQt6
+scikit-learn

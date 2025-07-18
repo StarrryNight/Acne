@@ -54,7 +54,7 @@ for i,x in enumerate([1511,1654,1713,1692,1757]):
 annotation_df = pd.read_csv("preprocessed_data/annotation_df.csv")
 
 
-IoU_cutoff_object     = 0.7
+IoU_cutoff_object     = 0.6
 IoU_cutoff_not_object = 0.4
 objnms = ["image0","info0","image1","info1","image1","info1","image1","info1","image1","info1","image1","info1"]  
 dir_result = "result"
@@ -106,12 +106,7 @@ for irow in range(annotation_df.shape[0]):
             true_ymax     = row["bbx_{}_ymax".format(ibb)]*multy
             _positive = None
             _positive_info = None
-            count =0 
-            for names in region_data:
-                if len(names)!=0:
-                    count+=1
-            if count ==4:
-                continue
+            print(_positive)
             # for each candidate region, find if this classifier object is included
             for r in regions:
                 prpl_xmin, prpl_ymin, prpl_width, prpl_height = r["rect"]
@@ -120,11 +115,11 @@ for irow in range(annotation_df.shape[0]):
                     prpl_xmin + prpl_width > img.shape[1] or
                     prpl_ymin + prpl_height > img.shape[0]):
                     continue
-                if len(region_data[name])!=0:
-                    continue
                 # calculate IoU between the candidate region and the classifier object
                 IoU = h.get_IOU(prpl_xmin, prpl_ymin, prpl_xmin + prpl_width, prpl_ymin + prpl_height,
                                  true_xmin, true_ymin, true_xmax, true_ymax)
+                if IoU ==0:
+                    continue
                 # candidate region numpy array
                 img_bb = np.array(img[prpl_ymin:prpl_ymin + prpl_height,
                                       prpl_xmin:prpl_xmin + prpl_width])
@@ -138,6 +133,7 @@ for irow in range(annotation_df.shape[0]):
                     print('jo')
                     _positive = img_bb_warped
                     _positive_info = info
+                    print(_positive)
                     # Only add the first valid region for this object
                     region_data[name]['positives'].append(_positive)
                     region_data[name]['infos'].append(_positive_info)

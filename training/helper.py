@@ -360,3 +360,8 @@ def get_IOU(xmin1,ymin1,xmax1,ymax1,
     else:
         IOU = int_area / float(area1 + area2 - int_area)
     return(IOU)
+
+
+def warp(img, newsize):
+    img_resize = skimage.transform.resize(img,newsize)
+    return(img_resize)
