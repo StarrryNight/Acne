@@ -1,0 +1,8 @@
+scikit-image
+imageio
+tensorflow
+keras
+matplotlib
+seaborn
+pandas
+pyQt6

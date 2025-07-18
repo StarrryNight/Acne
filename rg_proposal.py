@@ -29,10 +29,10 @@ for imgnm in random_img_path:
     
         fig = plt.figure(figsize=(15,30))
         ax  = fig.add_subplot(1,2,1)
-        ax.imshow(img_8bit)
+        #ax.imshow(img_8bit)
         ax.set_title("original image")
         ax  = fig.add_subplot(1,2,2)
-        ax.imshow(img[:,:,3])
+        #ax.imshow(img[:,:,3])
         ax.set_title("skimage.segmentation.felzenszwalb, N unique region = {}".format(len(np.unique(img[:,:,3]))))
         #plt.show()
 
@@ -45,7 +45,7 @@ print("{} rectangle regions are found".format(len(R)))
 #GTenerate regionmaps
 figsize = (20,20)
 plt.figure(figsize=figsize)    
-plt.imshow(img[:,:,:3]/2**8)
+#plt.imshow(img[:,:,:3]/2**8)
 for item, color in zip(R.values(),sns.xkcd_rgb.values()):
     x1 = item["min_x"]
     y1 = item["min_y"]
@@ -53,10 +53,10 @@ for item, color in zip(R.values(),sns.xkcd_rgb.values()):
     y2 = item["max_y"]
     label = item["labels"][0]
     h.plt_rectangle(plt,label,x1,y1,x2,y2,color=color)
-plt.show()
+#plt.show()
 
 plt.figure(figsize=figsize)    
-plt.imshow(img[:,:,3])
+#plt.imshow(img[:,:,3])
 for item, color in zip(R.values(),sns.xkcd_rgb.values()):
     x1 = item["min_x"]
     y1 = item["min_y"]
@@ -64,7 +64,7 @@ for item, color in zip(R.values(),sns.xkcd_rgb.values()):
     y2 = item["max_y"]
     label = item["labels"][0]
     h.plt_rectangle(plt,label,x1,y1,x2,y2,color=color)
-plt.show()
+#plt.show()
 
 
 
@@ -90,15 +90,15 @@ regions = h.merge_regions_in_order(S,R,img.shape[0]*img.shape[1],verbose=True)
 
 
 plt.figure(figsize=(20,20))    
-plt.imshow(img[:,:,:3]/2**8)
+#plt.imshow(img[:,:,:3]/2**8)
 for item, color in zip(regions,sns.xkcd_rgb.values()):
     x1, y1, width, height = item["rect"]
     label = item["labels"][:5]
     h.plt_rectangle(plt,label,x1,y1,x2 = x1 + width,y2 = y1 + height, color = color)
-plt.show()
+#plt.show()
 
 plt.figure(figsize=(20,20))    
-plt.imshow(img[:,:,3])
+#plt.imshow(img[:,:,3])
 for item, color in zip(regions,sns.xkcd_rgb.values()):
     x1, y1, width, height = item["rect"]
     label = item["labels"][:5]
@@ -107,8 +107,9 @@ for item, color in zip(regions,sns.xkcd_rgb.values()):
                   y1,
                   x2 = x1 + width,
                   y2 = y1 + height, color= color)
-plt.show()
+#plt.show()
 
 
-
-regions = h.get_region_proposal(img_8bit,min_size=500)
+def selective_search(im): 
+    regions = h.get_region_proposal(im,min_size=500)
+    return regions

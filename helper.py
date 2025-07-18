@@ -47,11 +47,11 @@ def calc_texture_gradient(img):
 
 def plot_image_with_min_max(img,nm):
     img = img[:,:,:3]
-    plt.imshow(img)
+    #plt.imshow(img)
     plt.title("{} min={:5.3f}, max={:5.3f}".format(nm,
                                                    np.min(img),
                                                    np.max(img)))
-    plt.show()
+    #plt.show()
 
 #Calculate hsv
 def calc_hsv(img):
@@ -322,3 +322,41 @@ def get_region_proposal(img_8bit,min_size = 500):
     regions    = merge_regions_in_order(S,R,imsize = img.shape[0] * img.shape[1])
     return(regions)
 
+def get_IOU(xmin1,ymin1,xmax1,ymax1,
+            xmin2,ymin2,xmax2,ymax2):
+    '''
+     
+    (minx1, miny1)
+          _____________________
+          |                   |
+          |     (minx2,maxy2) |
+          |           ________|____ 
+          |          |        |    |
+          |          |        |    |
+          |          |________|____|(maxx2, maxy2)
+          |___________________|(maxx1, maxy1)
+          
+    
+                         
+    '''    
+    def get_wha(xmin1,xmax1,ymin1,ymax1):
+            width1  = xmax1 - xmin1
+            height1 = ymax1 - ymin1
+            area1   = width1 * height1
+            return(width1,height1,area1)
+    width1,height1,area1 = get_wha(xmin1,xmax1,ymin1,ymax1)
+    width2,height2,area2 = get_wha(xmin2,xmax2,ymin2,ymax2)
+            
+    int_xmin   = np.max([xmin1,xmin2])
+    int_ymin   = np.max([ymin1,ymin2])
+    int_xmax   = np.min([xmax1,xmax2])
+    int_ymax   = np.min([ymax1,ymax2])            
+    int_width  = int_xmax - int_xmin
+    int_height = int_ymax - int_ymin
+    int_area   = int_width*int_height    
+    
+    if (int_width < 0) or (int_height < 0):
+        IOU = 0
+    else:
+        IOU = int_area / float(area1 + area2 - int_area)
+    return(IOU)
