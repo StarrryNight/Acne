@@ -1,5 +1,6 @@
 # Acne Detector Region Proposal Pipeline
-
+**Latest model accuracy -- 50%
+loss and accuracy graphs:
 ## Introduction
 
 This project is designed to process and prepare image data for training convolutional neural networks (CNNs) to detect various types of acne lesions (such as blackheads, whiteheads, nodules, dark spots, and pustules) in facial images. The pipeline uses region proposal techniques and annotation data to extract and save candidate regions for each acne type, making it easier to train robust object detection models.
