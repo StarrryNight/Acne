@@ -4,7 +4,7 @@
 loss and accuracy graphs:
 <img width="1910" height="558" alt="image" src="https://github.com/user-attachments/assets/700ef095-7fb9-45eb-bd54-2ad9a00907af" />
 
-## Introduction
+## Introduction (Image from Roboflow dataset)
 <img width="1067" height="406" alt="image" src="https://github.com/user-attachments/assets/70282dc5-3c31-4151-ba17-875673f15290" />
 
 This project is designed to process and prepare image data for training convolutional neural networks (CNNs) to detect various types of acne lesions (such as blackheads, whiteheads, nodules, dark spots, and pustules) in facial images. The pipeline uses region proposal techniques and annotation data to extract and save candidate regions for each acne type, making it easier to train robust object detection models.
@@ -13,6 +13,7 @@ Instead of a traditional CNN, the project uses RCNN, regional convolutional netw
 
 This project is based on Rich feature hierarchies for accurate object detection and semantic segmentation by Ross Girshick et al, and is modified upon ObjectDetectionWithRCNN from Yumi Kondo on github. 
 
+Model is trained using dataset from https://universe.roboflow.com/acne-training-9ct8c/acne-training-3
 ## Requirements
 
 - Python 3.7+
