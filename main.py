@@ -8,10 +8,10 @@ from keras.applications import VGG16
 from keras import models
 import time
 from keras.models import load_model
-
+import training.helper as h
 
 dir_image = "preprocessed_data/valid"
-img = imageio.imread(os.path.join(dir_image,"01F3MMVCYP2RSAQXDX608JXCXX_jpeg.rf.f674829b29e4c8ff42be22b4bc8c7cfc.jpg"))
+img = imageio.imread(os.path.join(dir_image,"levle2_33_jpg.rf.82673c1c060e160552fb5a8ae1a19982.jpg"))
 ## resize the image because the original image is a bit too large and takes lots of time for computation
 # I used this resizing hack to train the classifier and also to extract candidate regions
 newsize = (200,250)
@@ -33,49 +33,9 @@ for r in regions[-10:]:
     print(r)
 
     
-def plt_rectangle(plt,label,x1,y1,x2,y2,color = "yellow", alpha=0.5):
-    linewidth = 3
-    if type(label) == list:
-        linewidth = len(label)*3 + 2
-        label = ""
-        
-    plt.text(x1,y1,label,fontsize=20,backgroundcolor=color,alpha=alpha)
-    plt.plot([x1,x1],[y1,y2], linewidth=linewidth,color=color, alpha=alpha)
-    plt.plot([x2,x2],[y1,y2], linewidth=linewidth,color=color, alpha=alpha)
-    plt.plot([x1,x2],[y1,y1], linewidth=linewidth,color=color, alpha=alpha)
-    plt.plot([x1,x2],[y2,y2], linewidth=linewidth,color=color, alpha=alpha)
-    
-    
-plt.figure(figsize=(20,20))    
-plt.imshow(img)
-for item, color in zip(regions,sns.xkcd_rgb.values()):
-    x1, y1, width, height = item["rect"]
-    label = item["labels"][:5]
-    plt_rectangle(plt,label,
-                  x1,
-                  y1,
-                  x2 = x1 + width,
-                  y2 = y1 + height, 
-                  color= color)
-plt.show()
 
 
-def warp_candidate_regions(img,regions):
-    ## for each candidate region, 
-    ## warp the image and extract features 
-    newsize_cnn = (224, 224)
-    X = []
-    for i, r in enumerate(regions):
-        origx , origy , width, height = r["rect"]
-        candidate_region = img[origy:origy + height,
-                               origx:origx + width]
-        img_resize = skimage.transform.resize(candidate_region,newsize_cnn)
-        X.append(img_resize)
-
-    X = np.array(X)
-    print(X.shape)
-    return(X)
-X = warp_candidate_regions(img,regions)
+X = h.warp_candidate_regions(img,regions)
 
 modelvgg16 = VGG16(include_top=True,weights='imagenet')
 modelvgg16.summary()
@@ -93,7 +53,43 @@ dir_result = "result"
 classifier = load_model(os.path.join(dir_result,"classifier.h5"))
 classifier.summary()
 y_pred = classifier.predict(feature)
-
-
 classifier_types = ['blackheads', 'whiteheads', 'nodules', 'dark spot', 'pustules']
-print(classifier_types[y_pred.index(max(y_pred))])
+def plot_selected_regions_with_estimated_prob(y_pred,
+                                              method="highest",
+                                              upto=5):
+    ## increasing order
+    irows = np.argsort(y_pred[:,0])
+    if method == "highest":
+        irows = irows
+    count = 1
+    const = 4
+    fig = plt.figure(figsize=(5*const,int(np.ceil(upto/5))*const))
+    fig.subplots_adjust(hspace=0.13,wspace=0.0001,
+                        left=0,right=1,bottom=0, top=1)
+    for irow in irows:
+        print(y_pred[irow])
+        prob = np.max(y_pred[irow])
+        typee = classifier_types[np.argmax(y_pred[irow])]
+        r    = regions[irow]
+        origx , origy , width, height = r["rect"]
+        
+        ax = fig.add_subplot(int(np.ceil(upto/5)),5,count)
+        ax.imshow(img)
+        ax.axis("off")
+        h.plt_rectangle(ax,label="",
+                      x1=origx,
+                      y1=origy,
+                      x2=origx + width,
+                      y2=origy+height,color = "yellow", alpha=0.5)
+        
+        #candidate_region = img[origy:origy + height,
+        #                      origx:origx + width]       
+        #ax.imshow(candidate_region)
+        ax.set_title("Prob={:4.3f} type ={}".format(prob, typee))
+        count += 1
+        if count > upto:
+            break
+    plt.show()
+print("The most likely candidate regions")    
+plot_selected_regions_with_estimated_prob(y_pred,method="highest",upto=5)
+

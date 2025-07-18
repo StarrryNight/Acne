@@ -365,3 +365,19 @@ def get_IOU(xmin1,ymin1,xmax1,ymax1,
 def warp(img, newsize):
     img_resize = skimage.transform.resize(img,newsize)
     return(img_resize)
+
+def warp_candidate_regions(img,regions):
+    ## for each candidate region, 
+    ## warp the image and extract features 
+    newsize_cnn = (224, 224)
+    X = []
+    for i, r in enumerate(regions):
+        origx , origy , width, height = r["rect"]
+        candidate_region = img[origy:origy + height,
+                               origx:origx + width]
+        img_resize = skimage.transform.resize(candidate_region,newsize_cnn)
+        X.append(img_resize)
+
+    X = np.array(X)
+    print(X.shape)
+    return(X)
